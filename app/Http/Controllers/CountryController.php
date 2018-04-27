@@ -42,7 +42,7 @@ class CountryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:countries|max:255',
-            'contenent_id'=>'exists:contenents,id',
+            'contenent_id'=>'required|exists:contenents,id',
             ]);
         Country::create(Request()->all());
         $all = Country::all();
@@ -89,7 +89,7 @@ class CountryController extends Controller
                         'max:255',
                         Rule::unique('countries')->ignore($country->id),
                         ],
-            'contenent_id'=>'exists:contenents,id',
+            'contenent_id'=>'required|exists:contenents,id',
             ]);
         $country->name = $request->input('name');
         $country->contenent_id = $request->input('contenent_id');
