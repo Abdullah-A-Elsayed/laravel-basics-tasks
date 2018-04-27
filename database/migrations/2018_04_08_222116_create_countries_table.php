@@ -17,7 +17,7 @@ class CreateCountriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedInteger('contenent_id');
-            $table->foreign('contenent_id')->references('id')->on('contenents');
+            $table->foreign('contenent_id')->references('id')->on('contenents')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

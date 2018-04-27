@@ -43,7 +43,9 @@ class ContenentController extends Controller
             ]);
         $cont = contenent::create(Request()->all());
         $all = contenent::all();
-        return view('contenent.index',['conts'=>$all,'single'=>false]);
+
+        return redirect("/contenent");
+        //return view('contenent.index',['conts'=>$all,'single'=>false]);
     }
 
     /**
@@ -99,10 +101,10 @@ class ContenentController extends Controller
     public function destroy(contenent $contenent)
     {
         //return "d e l e t i n g ...";
-        $counts = $contenent->countries;
-        foreach ($counts as $count) {
-            $count->delete();
-        }
+        // $counts = $contenent->countries;
+        // foreach ($counts as $count) {
+        //     $count->delete();
+        // }
         $contenent->delete();
         return redirect("/contenent");
     }

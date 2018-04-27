@@ -46,7 +46,8 @@ class CountryController extends Controller
             ]);
         Country::create(Request()->all());
         $all = Country::all();
-        return view('country.index',['conts'=>$all,'single'=>false]);
+        return redirect("/country");
+        //return view('country.index',['conts'=>$all,'single'=>false]);
     }
 
     /**
