@@ -13,6 +13,10 @@ class ContenentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $all = contenent::all();
@@ -27,6 +31,10 @@ class ContenentController extends Controller
      */
     public function create()
     {
+        //1:user,  2:admin
+        if (auth()->user()->type == 1) {
+           return redirect()->back();
+        }
         return view('contenent.create');
     }
 
@@ -69,6 +77,9 @@ class ContenentController extends Controller
      */
     public function edit(contenent $contenent)
     {
+         if (auth()->user()->type == 1) {
+           return redirect()->back();
+        }
          return view("contenent.edit",['cont'=>$contenent]);
     }
 

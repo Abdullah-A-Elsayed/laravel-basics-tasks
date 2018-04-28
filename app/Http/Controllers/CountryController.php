@@ -14,6 +14,12 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $all = Country::all();
@@ -28,6 +34,11 @@ class CountryController extends Controller
      */
     public function create()
     {
+        //dd(auth()->user()->type);
+        //1:user,  2:admin
+        if (auth()->user()->type == 1) {
+           return redirect()->back();
+        }
         $conts = contenent::all();
         return view('country.create',['all_conts'=>$conts]);//select menu
     }
@@ -70,7 +81,11 @@ class CountryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Country $country)
-    {
+    {        
+        //1:user,  2:admin
+         if (auth()->user()->type == 1) {
+           return redirect()->back();
+        }
          $conts = contenent::all();
          return view("country.edit",['contr'=>$country,'all_conts'=>$conts]);
     }
